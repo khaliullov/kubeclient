@@ -217,6 +217,9 @@ module Kubeclient
       # until this issue is solved
       # https://github.com/GoogleCloudPlatform/kubernetes/issues/6439
       hash[:kind]       = entity_type
+      if entity_type == 'Endpoint'
+        hash['kind'] = 'Endpoints'
+      end
       hash[:apiVersion] = @api_version
       response = handle_exception do
         rest_client[ns_prefix + resource_name(entity_type)]
